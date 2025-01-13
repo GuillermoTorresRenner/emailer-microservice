@@ -1,0 +1,588 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model cake_sessions {
+  id      String  @id @default("") @db.VarChar(255)
+  data    String?
+  expires Int?
+}
+
+model casos {
+  id_caso                                         Int                @id(map: "PK_caso_id_caso") @default(autoincrement())
+  rut                                             Int
+  dv                                              String?            @db.Char(1)
+  apellido_paterno                                String             @db.VarChar(25)
+  apellido_materno                                String?            @db.VarChar(25)
+  nombres                                         String?            @db.VarChar(50)
+  id_sexo                                         Int?               @db.SmallInt
+  nacionalidad                                    String?            @db.VarChar(50)
+  fecha_nacimiento                                DateTime?          @db.Date
+  edad                                            Int?               @db.SmallInt
+  fecha_fallecimiento                             DateTime?          @db.Date
+  id_comuna                                       Int?               @db.SmallInt
+  nombre                                          String?            @db.VarChar(200)
+  dia_nacimiento                                  Int?
+  mes_nacimiento                                  Int?
+  ano1_nacimiento                                 Int?
+  ano2_nacimiento                                 Int?
+  edad_tipo                                       Int?
+  edad_cantidad                                   Int?
+  dia_defuncion                                   Int?
+  mes_defuncion                                   Int?
+  ano_defuncion                                   Int?
+  local_defuncion                                 Int?
+  diagnostico                                     String?            @db.VarChar(10)
+  calle_domicilio_carga                           String?            @db.VarChar(200)
+  numero_domicilio_carga                          String?            @db.VarChar(20)
+  letra_domicilio_carga                           String?            @db.VarChar(20)
+  resto_domicilio_carga                           String?            @db.VarChar(200)
+  calle_domicilio                                 String?            @db.VarChar(200)
+  numero_domicilio                                String?            @db.VarChar(20)
+  letra_domicilio                                 String?            @db.VarChar(20)
+  resto_domicilio                                 String?            @db.VarChar(200)
+  id_institucion                                  Int?
+  id_aps                                          Int?
+  id_estado_caso                                  Int?
+  id_estado_auditoria                             Int?
+  id_causa_cierre                                 Int?
+  id_motivo_devolucion                            Int?
+  observacion_devolucion                          String?            @db.VarChar(255)
+  fecha_carga                                     DateTime?          @db.Date
+  archivo                                         String?
+  observacion                                     String?
+  numero_intento                                  String?            @db.VarChar(50)
+  fecha_asignacion                                DateTime?          @db.Date
+  extension                                       String?            @db.VarChar(50)
+  id_institucion2                                 Int?
+  estadoauditorias                                estadoauditorias?  @relation(fields: [id_estado_auditoria], references: [id_estado_auditoria], onUpdate: SetNull, map: "FK_Casos_By_EstadoAuditorias")
+  sexos                                           sexos?             @relation(fields: [id_sexo], references: [id_sexo], onUpdate: SetNull, map: "FK_Casos_By_Sexo")
+  institucions_casos_id_apsToinstitucions         institucions?      @relation("casos_id_apsToinstitucions", fields: [id_aps], references: [id_institucion], onUpdate: SetNull, map: "FK_Casos_X_APS")
+  comunas                                         comunas?           @relation(fields: [id_comuna], references: [id_comuna], onDelete: Restrict, onUpdate: Restrict, map: "FK_Casos_X_Comunas")
+  institucions_casos_id_institucionToinstitucions institucions?      @relation("casos_id_institucionToinstitucions", fields: [id_institucion], references: [id_institucion], onUpdate: SetNull, map: "FK_Casos_X_Institucion")
+  causacierres                                    causacierres?      @relation(fields: [id_causa_cierre], references: [id_causa_cierre], onUpdate: SetNull, map: "PK_Casos_By_CausaCierres")
+  motivodevolucions                               motivodevolucions? @relation(fields: [id_motivo_devolucion], references: [id_motivo_devolucion], onUpdate: SetNull, map: "PK_Casos_X_MotivoDevolucion")
+  historials                                      historials[]
+  intentos                                        intentos[]
+  visitas                                         visitas?
+
+  @@index([id_aps], map: "idx_casos_id_aps")
+  @@index([id_causa_cierre], map: "idx_casos_id_causa_cierre")
+  @@index([id_comuna], map: "idx_casos_id_comuna")
+  @@index([id_estado_auditoria], map: "idx_casos_id_estado_auditoria")
+  @@index([id_institucion], map: "idx_casos_id_institucion")
+  @@index([id_motivo_devolucion], map: "idx_casos_id_motivo_devolucion")
+  @@index([id_sexo], map: "idx_casos_id_sexo")
+  @@index([rut], map: "rut")
+}
+
+model causacierres {
+  id_causa_cierre Int      @id(map: "PF_causacierre_id_causa_cierre") @default(autoincrement())
+  descripcion     String   @unique(map: "UN_causacierre_descripcion_unique") @db.VarChar(50)
+  administrativo  Boolean?
+  casos           casos[]
+}
+
+model comorbilidadprecargas {
+  id_comorbiliadad_precarga         Int      @id(map: "PK_comorbilidad_precarga_id_comorbilidad")
+  id_encabezado_pre_carga           BigInt
+  hipertension                      Boolean?
+  diabetes                          Boolean?
+  epoc                              Boolean?
+  asma                              Boolean?
+  enfermedad_cerebro_vascular_o_ave Boolean?
+  enfermedad_cardiaca               Boolean?
+  enfermedad_renal                  Boolean?
+  malnutricion                      Boolean?
+  exceso                            Boolean?
+  deficit                           Boolean?
+  tuberculosis                      Boolean?
+  trastorno_salud_mental            Boolean?
+  vih                               Boolean?
+  dependiente_grave_o_total         Boolean?
+  cancer                            Boolean?
+  fumador                           Boolean?
+  terapias_cronicas_corticoides     Boolean?
+  otra_comorbilidad                 String?  @db.VarChar(100)
+  programa_era                      Boolean?
+  programa_cardiovascular           Boolean?
+  programa_atencion_domiciliaria    Boolean?
+  programa_cancer                   Boolean?
+  programa_salud_mental             Boolean?
+  otro_programa                     Boolean?
+  detalle_otro_programa             String?  @db.VarChar(250)
+  vacunacion_influenza              Boolean?
+  asistencia_ventilatoria_domicilio Boolean?
+  oxigenoterapia_domiciliaria       Boolean?
+  especifique_oxigenoterapia        String?  @db.VarChar(250)
+}
+
+model comorbilidads {
+  id_comorbilidad                   Int      @id(map: "PK_comorbilidad_id_comorbilidad") @default(autoincrement())
+  hipertension                      Boolean?
+  diabetes                          Boolean?
+  epoc                              Boolean?
+  asma                              Boolean?
+  enfermedad_cerebro_vascular_o_ave Boolean?
+  enfermedad_cardiaca               Boolean?
+  enfermedad_renal                  Boolean?
+  malnutricion                      Boolean?
+  exceso                            Boolean?
+  deficit                           Boolean?
+  tuberculosis                      Boolean?
+  trastorno_salud_mental            Boolean?
+  vih                               Boolean?
+  dependiente_grave_o_total         Boolean?
+  cancer                            Boolean?
+  fumador                           Boolean?
+  terapias_cronicas_corticoides     Boolean?
+  otra_comorbilidad                 String?  @db.VarChar(100)
+  programa_era                      Boolean?
+  programa_cardiovascular           Boolean?
+  programa_atencion_domiciliaria    Boolean?
+  programa_cancer                   Boolean?
+  programa_salud_mental             Boolean?
+  otro_programa                     Boolean?
+  detalle_otro_programa             String?  @db.VarChar(250)
+  vacunacion_influenza              Boolean?
+  asistencia_ventilatoria_domicilio Boolean?
+  oxigenoterapia_domiciliaria       Boolean?
+  especifique_oxigenoterapia        String?  @db.VarChar(250)
+  id_caso                           Int?
+}
+
+model comunas {
+  id_comuna            Int                    @id(map: "PK_comuna_id_comuna") @default(autoincrement())
+  comuna               String?                @db.VarChar(50)
+  id_provincia         Int
+  codigo_comuna        Int?                   @unique(map: "UN_Codigo_Comuna")
+  casos                casos[]
+  detalleprecargas     detalleprecargas[]
+  institucionbycomunas institucionbycomunas[]
+
+  @@unique([comuna, id_provincia], map: "UN_comuna_id_provincia")
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+model detallehistorialcarga {
+  id_encabezado_pre_carga   BigInt
+  rut                       Int
+  dv                        String?   @db.Char(1)
+  apellido_paterno          String    @db.VarChar(25)
+  apellido_materno          String?   @db.VarChar(25)
+  nombres                   String?   @db.VarChar(50)
+  id_sexo                   Int       @db.SmallInt
+  nacionalidad              String?   @db.VarChar(50)
+  fecha_nacimiento          DateTime? @db.Date
+  edad                      Int?      @db.SmallInt
+  fecha_fallecimiento       DateTime? @db.Date
+  direccion                 String?   @db.VarChar(255)
+  id_comuna                 Int?      @db.SmallInt
+  id_provincia              Int?      @db.SmallInt
+  id_region                 Int?      @db.SmallInt
+  id_prevision              Int?      @db.SmallInt
+  inscripcion               String?   @db.VarChar(50)
+  nombre_establecimiento    String?   @db.VarChar(100)
+  id_comuna_establecimiento Int?      @db.SmallInt
+  hospital_referencia       String?   @db.VarChar(50)
+  servicio_salud            String?   @db.VarChar(30)
+  nombre_funcionario        String?   @db.VarChar(50)
+
+  @@ignore
+}
+
+model detalleprecargas {
+  run              Int           @id(map: "PK_Detalleprecargas_Run")
+  nombre           String?       @db.VarChar(200)
+  dia_nacimiento   Int?
+  mes_nacimiento   Int?
+  ano1_nacimiento  Int?
+  ano2_nacimiento  Int?
+  edad_tipo        Int?
+  edad_cantidad    Int?
+  dia_defuncion    Int?
+  mes_defuncion    Int?
+  ano_defuncion    Int?
+  local_defuncion  Int?
+  id_comuna        Int?
+  diagnostico      String?       @db.VarChar(20)
+  calle_domicilio  String?       @db.VarChar(100)
+  numero_domicilio String?       @db.VarChar(20)
+  letra_domicilio  String?       @db.VarChar(20)
+  resto_direccion  String?       @db.VarChar(200)
+  dv               String?       @db.VarChar(1)
+  id_institucion   Int?
+  id_institucion2  Int?
+  comunas          comunas?      @relation(fields: [id_comuna], references: [codigo_comuna], onDelete: Restrict, onUpdate: Restrict, map: "FK_DetallePrecargas_Comunas_Id_Comuna")
+  institucions     institucions? @relation(fields: [id_institucion], references: [id_institucion], onUpdate: SetNull, map: "FK_Detalleprecarga_X_Institucion")
+
+  @@index([id_comuna], map: "idx_detalleprecargas_id_comuna")
+  @@index([id_institucion], map: "idx_detalleprecargas_id_institucion")
+}
+
+model encabezadoprecargas {
+  id_encabezado_pre_carga Int       @id(map: "PK_encabezadoprecarga_id_encabezado_pre_carga") @default(autoincrement())
+  cantidad_cargados       Int?
+  usuario_carga           String?
+  fecha_carga             DateTime? @db.Date
+}
+
+model encuestado {
+  id_encuestado    Int      @id(map: "PK_encuestado_id_encuestado") @default(autoincrement())
+  rut              Decimal? @db.Decimal(10, 0)
+  dv               String?  @db.Char(1)
+  apellido_paterno String?  @db.Char(30)
+  apellido_materno String?  @db.Char(30)
+  nombres          String?  @db.Char(50)
+  parentesco       String?  @db.Char(30)
+  edad             Int?
+  id_caso          Int?
+}
+
+model encuestas {
+  id_encuesta        Int       @id(map: "PK_encuestas_id_encuesta") @default(autoincrement())
+  id_rango_etario    Int?
+  descripcion        String?   @db.VarChar(100)
+  id_causa_cierre    Int?
+  id_estado_encuesta Int?
+  visitas            visitas[]
+}
+
+model estadoauditorias {
+  id_estado_auditoria Int     @id(map: "PK_EstadoAuditoria") @default(autoincrement())
+  descripcion         String? @db.VarChar(50)
+  casos               casos[]
+}
+
+model estadocasos {
+  id_estado_caso Int     @id(map: "PK_estado_caso") @default(autoincrement())
+  descripcion    String? @db.Char(20)
+}
+
+model estadoencuestas {
+  id_estado_encuesta Int     @id(map: "PK_estadoencuesta_id_estado_encuesta") @default(autoincrement())
+  descripcion        String? @unique(map: "UN_estadoencuesta_descripcion") @db.VarChar(30)
+}
+
+model estadovisitas {
+  id_estado_visita Int       @id(map: "PK_estado_visita_id_estado_visita") @default(autoincrement())
+  descripcion      String?   @db.VarChar(25)
+  visitas          visitas[]
+}
+
+model grupopermisos {
+  id_grupo_permiso     Int                    @id(map: "Pk_grupopermiso_id_grupo_permiso") @default(autoincrement())
+  descripcion          String?                @db.VarChar(50)
+  grupopermisosbyusers grupopermisosbyusers[]
+}
+
+model grupopermisosbyusers {
+  id_user          Int
+  id_grupo_permiso Int
+  users            users         @relation(fields: [id_user], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "FK_User_By_Grupopermisosbyusers")
+  grupopermisos    grupopermisos @relation(fields: [id_grupo_permiso], references: [id_grupo_permiso], onDelete: NoAction, onUpdate: NoAction, map: "FK_grupo_permiso_x_usuario_grupo_permisos")
+
+  @@id([id_user, id_grupo_permiso], map: "PK_usuario_x_grupo_permisos")
+  @@index([id_grupo_permiso], map: "idx_grupopermisosbyusers_id_grupo_permiso")
+  @@index([id_user], map: "idx_grupopermisosbyusers_id_user")
+}
+
+model grupopermisosxpermisos {
+  id_grupo_permiso Int
+  id_permiso       Int
+
+  @@id([id_grupo_permiso, id_permiso], map: "PK_grupo_permisos_x_permisos")
+}
+
+model historials {
+  id_historial Int       @id(map: "PK_Historial_Id_Historial") @default(autoincrement())
+  id_caso      Int?
+  observacion  String?   @db.VarChar(2500)
+  estado       String?   @db.VarChar(50)
+  createat     DateTime? @db.Timestamp(6)
+  casos        casos?    @relation(fields: [id_caso], references: [id_caso], onDelete: Restrict, onUpdate: Restrict, map: "FK_Historial_By_Caso")
+
+  @@index([id_caso], map: "idx_historials_id_caso")
+}
+
+model institucionbycomunas {
+  id_institucion Int
+  id_region      Int?
+  id_provincia   Int?
+  id_comuna      Int
+  comunas        comunas      @relation(fields: [id_comuna], references: [id_comuna], onDelete: NoAction, onUpdate: NoAction, map: "FK_Institucionbycomunas_X_Comunas")
+  institucions   institucions @relation(fields: [id_institucion], references: [id_institucion], onUpdate: Restrict, map: "FK_Institucionbycomunas_X_Institucion")
+  provincias     provincias?  @relation(fields: [id_provincia], references: [id_provincia], onDelete: Restrict, onUpdate: Restrict, map: "FK_Institucionbycomunas_X_Provincias")
+  regions        regions?     @relation(fields: [id_region], references: [id_region], onDelete: Restrict, onUpdate: Restrict, map: "FK_Institucionbycomunas_X_Region")
+
+  @@id([id_institucion, id_comuna], map: "PK_id_institucion_id_comuna")
+  @@index([id_comuna], map: "idx_institucionbycomunas_id_comuna")
+  @@index([id_institucion], map: "idx_institucionbycomunas_id_institucion")
+  @@index([id_provincia], map: "idx_institucionbycomunas_id_provincia")
+  @@index([id_region], map: "idx_institucionbycomunas_id_region")
+}
+
+model institucions {
+  id_institucion                           Int                    @id(map: "PK_institucion_id_institucion") @default(autoincrement())
+  descripcion                              String?                @db.VarChar(150)
+  id_nivel_institucion                     Int?
+  id_institucions                          Int?
+  codigo_deis                              Int?
+  hospital_referencia                      Boolean?
+  cant_usuarios                            Int                    @default(-1)
+  casos_casos_id_apsToinstitucions         casos[]                @relation("casos_id_apsToinstitucions")
+  casos_casos_id_institucionToinstitucions casos[]                @relation("casos_id_institucionToinstitucions")
+  detalleprecargas                         detalleprecargas[]
+  institucionbycomunas                     institucionbycomunas[]
+  institucions                             institucions?          @relation("institucionsToinstitucions", fields: [id_institucions], references: [id_institucion], onUpdate: SetNull, map: "FK_InstitucionByInstitucion")
+  other_institucions                       institucions[]         @relation("institucionsToinstitucions")
+  nivelinstitucions                        nivelinstitucions?     @relation(fields: [id_nivel_institucion], references: [id_nivel_institucion], onDelete: NoAction, onUpdate: NoAction, map: "FK_institucion_nivelinstitucion")
+
+  @@index([id_institucions], map: "idx_institucions_id_institucions")
+  @@index([id_nivel_institucion], map: "idx_institucions_id_nivel_institucion")
+}
+
+model intentos {
+  id_intento            Int                @id(map: "PK_Id_Intento") @default(autoincrement())
+  id_caso               Int?
+  fecha_intento         DateTime?          @db.Date
+  id_motivo_no_contacto Int?
+  casos                 casos?             @relation(fields: [id_caso], references: [id_caso], onUpdate: SetNull, map: "FK_intento_by_casos")
+  motivonocontactos     motivonocontactos? @relation(fields: [id_motivo_no_contacto], references: [id_motivo_no_contacto], onDelete: NoAction, onUpdate: NoAction, map: "PK_intentos_by_motivosnocontactos")
+
+  @@index([id_caso], map: "idx_intentos_id_caso")
+  @@index([id_motivo_no_contacto], map: "idx_intentos_id_motivo_no_contacto")
+}
+
+model minetypes {
+  id_mimetype         Int     @id(map: "PK_MimeType") @default(autoincrement())
+  extencion           String? @db.VarChar(10)
+  mimetypedescription String? @db.VarChar(100)
+}
+
+model motivocierres {
+  id_motivo_cierre Int     @id(map: "PK_Motivo_de_Cierre") @default(autoincrement())
+  descripcion      String? @db.VarChar(50)
+}
+
+model motivodevolucions {
+  id_motivo_devolucion Int      @id(map: "PK_MotivoDevolucion") @default(autoincrement())
+  descripcion          String?  @db.VarChar(100)
+  aps                  Boolean?
+  ss                   Boolean?
+  casos                casos[]
+}
+
+model motivonocontactos {
+  id_motivo_no_contacto Int        @id(map: "PK_id_motivo_no_contacto") @default(autoincrement())
+  descripcion           String?    @db.VarChar(50)
+  intentos              intentos[]
+}
+
+model nivelinstitucions {
+  id_nivel_institucion Int            @id(map: "PK_nivel_institucion") @default(autoincrement())
+  descripcion          String?        @db.VarChar(30)
+  institucions         institucions[]
+}
+
+model normas {
+  id_norma    Int     @id(map: "PK_nomina_id_nomina") @default(autoincrement())
+  titulo      String? @db.VarChar(50)
+  observacion String?
+  archivo     String?
+  extension   String? @db.VarChar(5)
+}
+
+model opcionespreguntas {
+  id_opcion_pregunta Int        @id(map: "PK_opcionespreguntas_id_opcion_pregunta") @default(autoincrement())
+  id_pregunta        Int?
+  descripcion        String?    @db.VarChar(150)
+  next               String?    @db.VarChar(10)
+  preguntas          preguntas? @relation(fields: [id_pregunta], references: [id_pregunta], onDelete: Cascade, map: "FK_Preguntas_Opciones_de_preguntas")
+
+  @@index([id_pregunta], map: "idx_opcionespreguntas_id_pregunta")
+}
+
+model permisos {
+  id_permiso      Int               @id(map: "PK_permisos_id_permiso") @default(autoincrement())
+  descripcion     String?           @db.VarChar(30)
+  permisosbyusers permisosbyusers[]
+}
+
+model permisosbyusers {
+  id_permiso Int
+  id_user    Int
+  permisos   permisos @relation(fields: [id_permiso], references: [id_permiso], onDelete: NoAction, onUpdate: NoAction, map: "FK_Permisosbyusers_X_Permisos")
+
+  @@id([id_permiso, id_user], map: "PK_id_permiso_id_user")
+  @@index([id_permiso], map: "idx_permisosbyusers_id_permiso")
+}
+
+model preguntas {
+  id_pregunta       Int                 @id(map: "PK_preguntas_id_pregunta") @default(autoincrement())
+  id_tipo_pregunta  Int?
+  id_seccion        Int?
+  descripcion       String?             @db.VarChar(150)
+  numero_pregunta   String?             @db.VarChar(10)
+  previo            Boolean?
+  obligatorio       Boolean?
+  orden             Int?
+  id_rango_etario   Int?
+  opcionespreguntas opcionespreguntas[]
+  rangoetarios      rangoetarios?       @relation(fields: [id_rango_etario], references: [id_rango_etario], onUpdate: SetNull, map: "FK_Preguntas_X_RangoEtarios")
+  seccions          seccions?           @relation(fields: [id_seccion], references: [id_seccion], onDelete: Restrict, onUpdate: Restrict, map: "FK_Preguntas_by_Seccion")
+  tipopreguntas     tipopreguntas?      @relation(fields: [id_tipo_pregunta], references: [id_tipo_pregunta], onDelete: Restrict, onUpdate: Restrict, map: "FK_preguntas_by_tipopregunta")
+
+  @@index([id_rango_etario], map: "idx_preguntas_id_rango_etario")
+  @@index([id_seccion], map: "idx_preguntas_id_seccion")
+  @@index([id_tipo_pregunta], map: "idx_preguntas_id_tipo_pregunta")
+}
+
+model preguntasxencuestas {
+  id_encuesta          Int?
+  id_pregunta          Int?
+  id_pregunta_encuesta Int  @id(map: "PK_pregunta_x_encuesta_id_pregunta_encuesta") @default(autoincrement())
+}
+
+model previsions {
+  id_prevision Int    @id(map: "PK_tramofonasa_id_tramo_fonasa") @default(autoincrement())
+  descripcion  String @db.VarChar(35)
+}
+
+model provincias {
+  id_provincia         Int                    @id(map: "PK_provincia_id_provincia")
+  provincia            String?                @db.VarChar(50)
+  id_region            Int
+  codigo_provincia     Int?                   @unique(map: "UN_codigo_provincia")
+  institucionbycomunas institucionbycomunas[]
+  regions              regions                @relation(fields: [id_region], references: [codigo_region], onUpdate: Restrict, map: "FK_Provincias_Regiones")
+
+  @@unique([id_region, provincia], map: "UN_id_region_provincia")
+  @@index([id_region], map: "idx_provincias_id_region")
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+model prueba {
+  prueba String? @db.VarChar
+
+  @@ignore
+}
+
+model rangoetarios {
+  id_rango_etario Int         @id(map: "PK_rango_etarios_id_rango_etario") @default(autoincrement())
+  descripcion     String      @db.VarChar(30)
+  edad_desde      Int         @db.SmallInt
+  edad_hasta      Int         @db.SmallInt
+  estado          Boolean     @default(false)
+  preguntas       preguntas[]
+  reportes        reportes[]
+}
+
+model regions {
+  id_region            Int                    @id(map: "PK_region_id_region")
+  region               String?                @unique(map: "UN_region") @db.VarChar(50)
+  codigo_region        Int?                   @unique(map: "UN_Codigo_Region")
+  institucionbycomunas institucionbycomunas[]
+  provincias           provincias[]
+}
+
+model reportes {
+  id_reporte      Int           @id(map: "PK_Reportes_id_reporte") @default(autoincrement())
+  id_rango_etario Int?
+  descripcion     String?       @db.VarChar(50)
+  rangoetarios    rangoetarios? @relation(fields: [id_rango_etario], references: [id_rango_etario], onDelete: Restrict, onUpdate: Restrict, map: "Reporte_by_Rango_Etarios")
+
+  @@index([id_rango_etario], map: "idx_reportes_id_rango_etario")
+}
+
+model respuestas {
+  id_respuesta         Int     @id(map: "PK_respuestas_id_respuesta") @default(autoincrement())
+  id_pregunta_encuesta Int?
+  respuesta            String? @db.VarChar(250)
+  id_caso              Int?
+}
+
+model seccions {
+  id_seccion  Int         @id(map: "PK_Seccions_id_seccion") @default(autoincrement())
+  descripcion String?     @db.VarChar(50)
+  orden       Int?
+  preguntas   preguntas[]
+}
+
+model sexos {
+  id_sexo     Int     @id(map: "PK_sexo_id_sexo") @default(autoincrement())
+  descripcion String? @db.VarChar(50)
+  casos       casos[]
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+model test1 {
+  a Int?
+
+  @@ignore
+}
+
+model tipopreguntas {
+  id_tipo_pregunta Int         @id(map: "PK_tipopregunta_id_tipo_pregunta") @default(autoincrement())
+  descripcion      String?     @unique(map: "UN_tipopregunta_descripcion") @db.VarChar(30)
+  preguntas        preguntas[]
+}
+
+model users {
+  id                   Int                    @id(map: "PK_users_id") @default(autoincrement())
+  username             String?                @db.VarChar(50)
+  password             String?                @db.VarChar(255)
+  role                 String?                @db.VarChar(20)
+  created              DateTime?              @db.Date
+  modified             DateTime?              @db.Date
+  nombre               String?                @db.VarChar(50)
+  rut                  Int?
+  dv                   String?                @db.Char(1)
+  direccion            String?                @db.VarChar(250)
+  id_institucion       Int?
+  vigente              Boolean?
+  id_perfil            Int?
+  cargo                String?                @db.VarChar(50)
+  password_cel         String?                @db.VarChar(250)
+  grupopermisosbyusers grupopermisosbyusers[]
+  visitas              visitas[]
+}
+
+model usuarios {
+  id_usuario     Int      @id(map: "PK_usuarios_idusuario") @default(autoincrement())
+  nombre         String?  @db.Char(51)
+  rut            Decimal? @db.Decimal(10, 0)
+  dv             String?  @db.Char(1)
+  direccion      String?  @db.Char(200)
+  id_institucion Int?
+  password       String?  @db.VarChar(128)
+  email          String?  @db.VarChar(100)
+  vigente        Boolean?
+  id_perfil      Int?
+  cargo          String?  @db.Char(30)
+  username       String?  @db.VarChar(100)
+}
+
+model visitas {
+  id_visita        Int            @id(map: "PK_visita_id_visita") @default(autoincrement())
+  id_encuesta      Int?
+  id_caso          Int?           @unique(map: "UN_Visitas_id_caso")
+  fecha_prevista   DateTime?      @db.Date
+  fecha_realizada  DateTime?      @db.Date
+  id_user          Int?
+  id_estado_visita Int?
+  casos            casos?         @relation(fields: [id_caso], references: [id_caso], onDelete: Restrict, onUpdate: Restrict, map: "FK_visita_caso")
+  encuestas        encuestas?     @relation(fields: [id_encuesta], references: [id_encuesta], onDelete: Restrict, onUpdate: Restrict, map: "FK_visita_encuesta")
+  estadovisitas    estadovisitas? @relation(fields: [id_estado_visita], references: [id_estado_visita], onDelete: NoAction, onUpdate: NoAction, map: "FK_visita_estadovisita")
+  users            users?         @relation(fields: [id_user], references: [id], onDelete: Restrict, onUpdate: Restrict, map: "FK_visita_users")
+
+  @@index([id_caso], map: "idx_visitas_id_caso")
+  @@index([id_encuesta], map: "idx_visitas_id_encuesta")
+  @@index([id_estado_visita], map: "idx_visitas_id_estado_visita")
+  @@index([id_user], map: "idx_visitas_id_user")
+}
