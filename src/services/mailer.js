@@ -5,7 +5,7 @@ import logger from './logger.js';
 const transporter = nodemailer.createTransport({
     host: process.env.EMAIL_SMTP_SERVER, 
     port: process.env.EMAIL_SMTP_PORT, 
-    secure: false, 
+    secure: true, 
     auth: {
         user: process.env.EMAIL_FROM_ADDRESS,
         pass: process.env.EMAIL_FROM_ADDRESS_PASSWORD, // Contraseña del correo

@@ -1,0 +1,352 @@
+2025-01-14 12:35:01 error: Error al enviar correo: Error: Invalid login: 535 5.7.8 Error: authentication failed: authentication failure
+2025-01-14 12:36:01 error: Error al enviar correo: Error: 40E8F77CE27F0000:error:0A00010B:SSL routines:ssl3_get_record:wrong version number:../deps/openssl/openssl/ssl/record/ssl3_record.c:354:
+
+2025-01-14 12:37:00 error: Error al enviar correo: Error: 40E89FD3D77F0000:error:0A00010B:SSL routines:ssl3_get_record:wrong version number:../deps/openssl/openssl/ssl/record/ssl3_record.c:354:
+
+2025-01-14 12:39:00 error: Error al enviar correo: Error: 40F896D0D97F0000:error:0A00010B:SSL routines:ssl3_get_record:wrong version number:../deps/openssl/openssl/ssl/record/ssl3_record.c:354:
+
+2025-01-14 12:40:00 error: Error al enviar correo: Error: Invalid login: 535 5.7.8 Error: authentication failed: authentication failure
+2025-01-14 12:45:00 error: Error al enviar correo: Error: Invalid login: 535 5.7.8 Error: authentication failed: authentication failure
+2025-01-14 13:07:01 error: Error al enviar correo: Error: Invalid login: 535 5.7.8 Error: authentication failed: authentication failure
+2025-01-14 13:23:00 error: Error al enviar correo: Error: Invalid login: 535 5.7.8 Error: authentication failed: authentication failure
+2025-01-14 13:24:00 error: Error al enviar correo: Error: Invalid login: 535 5.7.8 Error: authentication failed: authentication failure
+2025-01-14 13:25:00 error: Error al enviar correo: Error: Invalid login: 535 5.7.8 Error: authentication failed: authentication failure
+2025-01-14 13:26:00 error: Error al enviar correo: Error: Invalid login: 535 5.7.8 Error: authentication failed: authentication failure
+2025-01-14 13:28:00 error: Error al enviar correo: Error: Invalid login: 535 5.7.8 Error: authentication failed: authentication failure
+2025-01-14 13:29:00 error: Error al enviar correo: Error: 40B8FD70E47F0000:error:0A00010B:SSL routines:ssl3_get_record:wrong version number:../deps/openssl/openssl/ssl/record/ssl3_record.c:354:
+
+2025-01-14 13:30:00 error: Error al enviar correo: Error: Invalid login: 535 5.7.8 Error: authentication failed: authentication failure
+2025-01-14 14:16:01 error: Error al enviar correo: Error: Invalid login: 535 5.7.8 Error: authentication failed: authentication failure
+2025-01-14 14:34:01 error: Error al enviar correo: Error: Invalid login: 535 5.7.8 Error: authentication failed: authentication failure
+2025-01-14 14:37:00 error: Error al enviar correo: Error: 40A870BCFC7E0000:error:0A00010B:SSL routines:ssl3_get_record:wrong version number:../deps/openssl/openssl/ssl/record/ssl3_record.c:354:
+
+2025-01-14 14:39:00 error: Error al enviar correo: Error: 4048FF1D777F0000:error:0A00010B:SSL routines:ssl3_get_record:wrong version number:../deps/openssl/openssl/ssl/record/ssl3_record.c:354:
+
+2025-01-14 14:41:01 error: Error al enviar correo: Error: 4028DDDD7E7F0000:error:0A00010B:SSL routines:ssl3_get_record:wrong version number:../deps/openssl/openssl/ssl/record/ssl3_record.c:354:
+
+2025-01-14 14:43:02 error: Error al enviar correo: Error: Invalid login: 535-5.7.8 Username and Password not accepted. For more information, go to
+535 5.7.8  https://support.google.com/mail/?p=BadCredentials 5614622812f47-3f0379eff75sm4305221b6e.36 - gsmtp
+2025-01-14 14:44:01 error: Error al enviar correo: Error: Invalid login: 535-5.7.8 Username and Password not accepted. For more information, go to
+535 5.7.8  https://support.google.com/mail/?p=BadCredentials 586e51a60fabf-2ad80591cb5sm5258841fac.23 - gsmtp
+2025-01-14 14:47:00 error: Error al enviar correo: Error: connect ECONNREFUSED 127.0.0.1:587
+2025-01-14 14:53:00 error: Error al enviar correo: Error: Invalid login: 535 5.7.8 Error: authentication failed: authentication failure
+2025-01-14 14:56:01 error: Error al enviar correo: Error: Invalid login: 535 5.7.8 Error: authentication failed: authentication failure
+2025-01-14 14:57:01 error: Error al enviar correo: Error: Invalid login: 535 5.7.8 Error: authentication failed: authentication failure
+2025-01-14 14:58:00 error: Error al enviar correo: Error: Invalid login: 535 5.7.8 Error: authentication failed: authentication failure
+2025-01-14 15:06:01 error: Error al enviar correo: Error: Invalid login: 535-5.7.8 Username and Password not accepted. For more information, go to
+535 5.7.8  https://support.google.com/mail/?p=BadCredentials 46e09a7af769-7231855ba89sm4820856a34.30 - gsmtp
+2025-01-14 16:29:00 error: Error al validar fechas: PrismaClientValidationError: 
+Invalid `prisma.casos.findMany()` invocation:
+
+{
+  where: {
+    fecha_asignacion: {
+      lte: "2025-01-13"
+           ~~~~~~~~~~~~
+    }
+  }
+}
+
+Invalid value for argument `lte`: premature end of input. Expected ISO-8601 DateTime.
+2025-01-15 11:13:04 error: Error al obtener emails: PrismaClientValidationError: 
+Invalid `prisma.users.findMany()` invocation:
+
+{
+  select: {
+    username: true,
+    name: true,
+    ~~~~
+?   id?: true,
+?   password?: true,
+?   role?: true,
+?   created?: true,
+?   modified?: true,
+?   nombre?: true,
+?   rut?: true,
+?   dv?: true,
+?   direccion?: true,
+?   id_institucion?: true,
+?   vigente?: true,
+?   id_perfil?: true,
+?   cargo?: true,
+?   password_cel?: true,
+?   grupopermisosbyusers?: true,
+?   visitas?: true,
+?   _count?: true
+  },
+  where: {
+    id: {
+      in: [
+        29
+      ]
+    },
+    vigente: true
+  },
+  orderBy: {
+    id: "asc"
+  }
+}
+
+Unknown field `name` for select statement on model `users`. Available options are marked with ?.
+2025-01-15 11:30:58 error: Error al obtener emails: PrismaClientValidationError: 
+Invalid `prisma.users.findMany()` invocation:
+
+{
+  select: {
+    username: true,
+    nombre: true,
+    id_institucion: true,
+    institution: {
+    ~~~~~~~~~~~
+      select: {
+        nombre: true
+      }
+    },
+?   id?: true,
+?   password?: true,
+?   role?: true,
+?   created?: true,
+?   modified?: true,
+?   rut?: true,
+?   dv?: true,
+?   direccion?: true,
+?   vigente?: true,
+?   id_perfil?: true,
+?   cargo?: true,
+?   password_cel?: true,
+?   grupopermisosbyusers?: true,
+?   visitas?: true,
+?   _count?: true
+  },
+  where: {
+    id_institucion: {
+      in: [
+        24,
+        29
+      ]
+    },
+    vigente: true
+  },
+  orderBy: {
+    id_institucion: "asc"
+  }
+}
+
+Unknown field `institution` for select statement on model `users`. Available options are marked with ?.
+2025-01-15 11:32:46 error: Error al obtener emails: PrismaClientValidationError: 
+Invalid `prisma.users.findMany()` invocation:
+
+{
+  select: {
+    username: true,
+    nombre: true,
+    id_institucion: true,
+    institucions: {
+    ~~~~~~~~~~~~
+      select: {
+        descripcion: true
+      }
+    },
+?   id?: true,
+?   password?: true,
+?   role?: true,
+?   created?: true,
+?   modified?: true,
+?   rut?: true,
+?   dv?: true,
+?   direccion?: true,
+?   vigente?: true,
+?   id_perfil?: true,
+?   cargo?: true,
+?   password_cel?: true,
+?   grupopermisosbyusers?: true,
+?   visitas?: true,
+?   _count?: true
+  },
+  where: {
+    id: {
+      in: [
+        24,
+        29
+      ]
+    },
+    vigente: true
+  },
+  orderBy: {
+    id_institucion: "asc"
+  }
+}
+
+Unknown field `institucions` for select statement on model `users`. Available options are marked with ?.
+2025-01-15 11:36:02 error: Error al obtener emails: PrismaClientValidationError: 
+Invalid `prisma.users.findMany()` invocation:
+
+{
+  select: {
+    username: true,
+    nombre: true,
+    id_institucion: true,
+    institucions: {
+    ~~~~~~~~~~~~
+      select: {
+        descripcion: true
+      }
+    },
+?   id?: true,
+?   password?: true,
+?   role?: true,
+?   created?: true,
+?   modified?: true,
+?   rut?: true,
+?   dv?: true,
+?   direccion?: true,
+?   vigente?: true,
+?   id_perfil?: true,
+?   cargo?: true,
+?   password_cel?: true,
+?   grupopermisosbyusers?: true,
+?   visitas?: true,
+?   _count?: true
+  },
+  where: {
+    id: {
+      in: [
+        24,
+        29
+      ]
+    },
+    vigente: true
+  },
+  orderBy: {
+    id_institucion: "asc"
+  }
+}
+
+Unknown field `institucions` for select statement on model `users`. Available options are marked with ?.
+2025-01-15 11:41:12 error: Error al obtener emails: PrismaClientValidationError: 
+Invalid `prisma.users.findMany()` invocation:
+
+{
+  select: {
+    username: true,
+    nombre: true,
+    id_institucion: true,
+    institucions: {
+    ~~~~~~~~~~~~
+      select: {
+        descripcion: true
+      }
+    },
+?   id?: true,
+?   password?: true,
+?   role?: true,
+?   created?: true,
+?   modified?: true,
+?   rut?: true,
+?   dv?: true,
+?   direccion?: true,
+?   vigente?: true,
+?   id_perfil?: true,
+?   cargo?: true,
+?   password_cel?: true,
+?   grupopermisosbyusers?: true,
+?   visitas?: true,
+?   _count?: true
+  },
+  where: {
+    id: {
+      in: [
+        24,
+        29
+      ]
+    },
+    vigente: true
+  },
+  orderBy: {
+    id_institucion: "asc"
+  }
+}
+
+Unknown field `institucions` for select statement on model `users`. Available options are marked with ?.
+2025-01-15 11:45:01 error: Error al obtener emails: PrismaClientValidationError: 
+Invalid `prisma.users.findMany()` invocation:
+
+{
+  select: {
+    username: true,
+    nombre: true,
+    id_institucion: true,
+    institucions: {
+    ~~~~~~~~~~~~
+      select: {
+        descripcion: true
+      }
+    },
+?   id?: true,
+?   password?: true,
+?   role?: true,
+?   created?: true,
+?   modified?: true,
+?   rut?: true,
+?   dv?: true,
+?   direccion?: true,
+?   vigente?: true,
+?   id_perfil?: true,
+?   cargo?: true,
+?   password_cel?: true,
+?   grupopermisosbyusers?: true,
+?   visitas?: true,
+?   _count?: true
+  },
+  where: {
+    id: {
+      in: [
+        24,
+        29
+      ]
+    },
+    vigente: true
+  },
+  orderBy: {
+    id_institucion: "asc"
+  }
+}
+
+Unknown field `institucions` for select statement on model `users`. Available options are marked with ?.
+2025-01-15 11:54:30 error: Error al obtener datos de instituciones: PrismaClientValidationError: 
+Invalid `prisma.institucions.findMany()` invocation:
+
+{
+  select: {
+    id: true,
+    descripcion: true
+  },
+  where: {
+    id: {
+    ~~
+      in: [
+        24,
+        29
+      ]
+    },
+?   AND?: institucionsWhereInput | institucionsWhereInput[],
+?   OR?: institucionsWhereInput[],
+?   NOT?: institucionsWhereInput | institucionsWhereInput[],
+?   id_institucion?: IntFilter | Int,
+?   descripcion?: StringNullableFilter | String | Null,
+?   id_nivel_institucion?: IntNullableFilter | Int | Null,
+?   id_institucions?: IntNullableFilter | Int | Null,
+?   codigo_deis?: IntNullableFilter | Int | Null,
+?   hospital_referencia?: BoolNullableFilter | Boolean | Null,
+?   cant_usuarios?: IntFilter | Int,
+?   casos_casos_id_apsToinstitucions?: CasosListRelationFilter,
+?   casos_casos_id_institucionToinstitucions?: CasosListRelationFilter,
+?   detalleprecargas?: DetalleprecargasListRelationFilter,
+?   institucionbycomunas?: InstitucionbycomunasListRelationFilter,
+?   institucions?: InstitucionsNullableScalarRelationFilter | institucionsWhereInput | Null,
+?   other_institucions?: InstitucionsListRelationFilter,
+?   nivelinstitucions?: NivelinstitucionsNullableScalarRelationFilter | nivelinstitucionsWhereInput | Null
+  }
+}
+
+Unknown argument `id`. Did you mean `OR`? Available options are marked with ?.
