@@ -3,15 +3,18 @@ import { PrismaClient } from "@prisma/client";
 import moment from "moment-business-days";
 
 const prisma = new PrismaClient();
-logger.debug('Validating dates...');
 
 export const getCasosUnresolved = async () => {
-
     // Calcula la fecha límite (30 días hábiles atrás desde hoy)
     const fechaLimite = moment().businessSubtract(30).toDate();
 
     try {
         const data = await prisma.casos.findMany({
+            select: {
+                id_caso: true,
+                fecha_asignacion: true,
+                id_institucion: true,
+            },
             where: {
                 fecha_asignacion: {
                     lte: fechaLimite
@@ -27,17 +30,29 @@ export const getCasosUnresolved = async () => {
                     }
                 ]
             },
+            distinct: ['id_caso'],
             orderBy: {
-                id_institucion: 'asc'
+                id_caso: 'asc'
             }
         });
 
-        
-        return data;
+        // Agregar el campo calculado
+        const today = moment();
+        const dataWithDaysDifference = data.map(caso => {
+            const fechaAsignacion = moment(caso.fecha_asignacion);
+            const diasDiferencia = today.diff(fechaAsignacion, 'days');
+            return {
+                ...caso,
+                dias_diferencia: diasDiferencia
+            };
+        });
+
+        return dataWithDaysDifference;
     } catch (error) {
         logger.error(`Error al validar fechas: ${error}`);
     }
 };
+
 
 export const getRecipientsData = async (institutionsId) => {
     try {
@@ -45,9 +60,9 @@ export const getRecipientsData = async (institutionsId) => {
             select: {
                 username: true,
                 nombre: true,
-                id_institucion:true,
-                
-                
+                id_institucion: true,
+
+
             },
             where: {
                 id_institucion: {
@@ -62,30 +77,30 @@ export const getRecipientsData = async (institutionsId) => {
         return data;
     } catch (error) {
         logger.error(`Error al obtener emails: ${error}`);
-    } 
+    }
 
 }
 
- export const getInstitutionsData = async (idInstitutions) => {
-        try {
-            const data = await prisma.institucions.findMany({
-                select: {
-                    id_institucion	: true,
-                    descripcion: true,
-                   
-                },
-                where: {
-                    id_institucion	: {
-                        in: idInstitutions
-                    }
-                },
-                orderBy: {
-                    id_institucion: 'asc'
-                }
+export const getInstitutionsData = async (idInstitutions) => {
+    try {
+        const data = await prisma.institucions.findMany({
+            select: {
+                id_institucion: true,
+                descripcion: true,
 
-            });
-            return data;
-        } catch (error) {
-            logger.error(`Error al obtener datos de instituciones: ${error}`);
-        }
+            },
+            where: {
+                id_institucion: {
+                    in: idInstitutions
+                }
+            },
+            orderBy: {
+                id_institucion: 'asc'
+            }
+
+        });
+        return data;
+    } catch (error) {
+        logger.error(`Error al obtener datos de instituciones: ${error}`);
     }
+}

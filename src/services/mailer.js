@@ -18,13 +18,13 @@ const transporter = nodemailer.createTransport({
 
 
 //TODO: cambiar parámetros par que sean dinámicos en base a las consutas de la base de datos
-export const sendEmail = async () => {
+export const sendEmail = async (html) => {
     try {
         const info = await transporter.sendMail({
             from: `"Soporte Técnico" <${process.env.EMAIL_FROM_ADDRESS}>`, // Nombre y correo del remitente
             to: process.env.EMAIL_TO_USER,
             subject: 'Prueba de Envío', // Asunto del correo
-            html: '<p>Este es un <b>correo de prueba</b> desde Nodemailer.</p>', 
+            html
         });
 
         logger.info(`Correo enviado: ${process.env.EMAIL_TO_USER}`);

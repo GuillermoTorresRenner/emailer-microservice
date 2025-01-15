@@ -350,3 +350,142 @@ Invalid `prisma.institucions.findMany()` invocation:
 }
 
 Unknown argument `id`. Did you mean `OR`? Available options are marked with ?.
+2025-01-15 16:50:29 error: Error al obtener emails: PrismaClientValidationError: 
+Invalid `prisma.users.findMany()` invocation:
+
+{
+  select: {
+    username: true,
+    nombre: true,
+    id_institucion: true
+  },
+  where: {
+    id_institucion: {
+      in: {
++       _ref: String
+      }
+    },
+    vigente: true
+  },
+  orderBy: {
+    id_institucion: "asc"
+  }
+}
+
+Argument `_ref` is missing.
+2025-01-15 16:50:29 error: Error al obtener datos de instituciones: PrismaClientValidationError: 
+Invalid `prisma.institucions.findMany()` invocation:
+
+{
+  select: {
+    id_institucion: true,
+    descripcion: true
+  },
+  where: {
+    id_institucion: {
+      in: {
++       _ref: String
+      }
+    }
+  },
+  orderBy: {
+    id_institucion: "asc"
+  }
+}
+
+Argument `_ref` is missing.
+2025-01-15 16:50:29 error: Error al obtener datos: TypeError: uniqueInstitutionsIds.forEach is not a function
+2025-01-15 16:50:29 error: Error al obtener emails: PrismaClientValidationError: 
+Invalid `prisma.users.findMany()` invocation:
+
+{
+  select: {
+    username: true,
+    nombre: true,
+    id_institucion: true
+  },
+  where: {
+    id_institucion: {
+      in: {
++       _ref: String
+      }
+    },
+    vigente: true
+  },
+  orderBy: {
+    id_institucion: "asc"
+  }
+}
+
+Argument `_ref` is missing.
+2025-01-15 16:50:29 error: Error al obtener datos de instituciones: PrismaClientValidationError: 
+Invalid `prisma.institucions.findMany()` invocation:
+
+{
+  select: {
+    id_institucion: true,
+    descripcion: true
+  },
+  where: {
+    id_institucion: {
+      in: {
++       _ref: String
+      }
+    }
+  },
+  orderBy: {
+    id_institucion: "asc"
+  }
+}
+
+Argument `_ref` is missing.
+2025-01-15 16:50:29 error: Error al obtener datos: TypeError: uniqueInstitutionsIds.forEach is not a function
+2025-01-15 17:37:38 error: Error al obtener datos: ReferenceError: id_institution is not defined
+2025-01-15 17:37:58 error: Error al obtener datos: ReferenceError: id_institucion is not defined
+2025-01-15 18:38:24 error: Error al obtener emails: PrismaClientValidationError: 
+Invalid `prisma.users.findMany()` invocation:
+
+{
+  select: {
+    username: true,
+    nombre: true,
+    id_institucion: true
+  },
+  where: {
+    id_institucion: {
+      in: [
+        undefined
+        ~~~~~~~~~
+      ]
+    },
+    vigente: true
+  },
+  orderBy: {
+    id_institucion: "asc"
+  }
+}
+
+Invalid value for argument `in[0]`: Can not use `undefined` value within array. Use `null` or filter out `undefined` values.
+2025-01-15 18:38:24 error: Error al obtener datos de instituciones: PrismaClientValidationError: 
+Invalid `prisma.institucions.findMany()` invocation:
+
+{
+  select: {
+    id_institucion: true,
+    descripcion: true
+  },
+  where: {
+    id_institucion: {
+      in: [
+        undefined
+        ~~~~~~~~~
+      ]
+    }
+  },
+  orderBy: {
+    id_institucion: "asc"
+  }
+}
+
+Invalid value for argument `in[0]`: Can not use `undefined` value within array. Use `null` or filter out `undefined` values.
+2025-01-15 18:38:24 error: Error al obtener datos: TypeError: Cannot read properties of undefined (reading 'find')

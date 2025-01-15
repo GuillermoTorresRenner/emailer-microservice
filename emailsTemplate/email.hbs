@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reporte de Casos</title>
+    <style>
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 16px;
+        }
+
+        .header {
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 16px;
+        }
+
+        .card {
+            background-color: #eee;
+            color: #1f2937;
+            padding: 30px 50px;
+            margin-bottom: 16px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .card h2 {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .card p {
+            margin-top: 16px;
+        }
+
+        .inner-card {
+            background-color: #7884aa;
+            color: white;
+            padding: 16px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .inner-card h2,
+        .inner-card h3 {
+            font-size: 18px;
+            font-weight: medium;
+            margin-bottom: 8px;
+        }
+
+        .list-disc {
+            list-style-type: disc;
+            padding-left: 20px;
+        }
+    </style>
+</head>
+
+<body style="background-color: #f3f4f6; color: #1f2937;">
+    <div class="container">
+        {{#each data}}
+        <div class="card">
+            <p>Estimado Referente de Servicio de Salud o APS responsable de auditorías de defunciones por neumonía:</p>
+
+            <p>
+                Le escribimos para informarle que en algunas auditorías a su cargo, han pasado más de 30 días hábiles
+                desde su
+                asignación y aún no se realiza ingreso de información de auditoría ejecutada. Le solicitamos ejecutar
+                las auditorías e
+                ingresar la información al sistema.
+            </p>
+            <p>
+                Las auditorías pendientes son:
+
+            </p>
+            <ul class="list-disc">
+                {{#each this.casos}}
+                <li class="inner-card">Auditoría {{this.id_caso}} - <strong>{{this.dias_diferencia}}</strong> Días sin
+                    información:
+                </li>
+                {{/each}}
+            </ul>
+            <h3>Destinatarios de este correo:</h3>
+            <ul class="list-disc">
+                {{#each this.recipients}}
+                <li>{{this.nombre}} - {{this.email}}</li>
+                {{/each}}
+            </ul>
+            <p>Saludos.</p>
+            <strong>Ministerio de Salud</strong>
+        </div>
+        {{/each}}
+    </div>
+</body>
+
+</html>
