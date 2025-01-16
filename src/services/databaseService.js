@@ -9,11 +9,7 @@ export const getEmailData = async () => {
         const uniqueInstitutionsIds = [...new Set(ids)];
         const recipientsData = await getRecipientsData(uniqueInstitutionsIds);
         const institutions = await getInstitutionsData(uniqueInstitutionsIds);
-        const group = {
-            institution: {},
-            recipients: [],
-            casos: []
-        }
+
         const data = []
         uniqueInstitutionsIds.forEach((id) => {
             const group = {

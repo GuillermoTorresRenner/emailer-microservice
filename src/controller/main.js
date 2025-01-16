@@ -1,4 +1,3 @@
-import logger from "../services/logger.js";
 import { getEmailData } from "../services/databaseService.js";
 import { sendEmail } from "../services/mailer.js";
 import handlebars from "handlebars";
@@ -17,6 +16,5 @@ export const main = async () => {
     const html = template({ data: emailInfo });
     // Enviar el correo
     await sendEmail(html);
-    logger.info("Correo enviado");
 };
 

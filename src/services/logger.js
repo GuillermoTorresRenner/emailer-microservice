@@ -1,10 +1,7 @@
-/*
-  Este módulo define un logger personalizado para la aplicación.
-*/
+
 
 import winston from "winston";
 
-// Define niveles personalizados de log y colores asociados
 const customLevels = {
   levels: { fatal: 0, error: 1, warning: 2, info: 3, http: 4, debug: 5 },
   colors: {

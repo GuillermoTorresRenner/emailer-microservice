@@ -1,7 +1,5 @@
+# Usa una imagen base de Node.js
 FROM node:18
-
-# Instala nodemon globalmente
-RUN npm i -g nodemon
 
 # Establece el directorio de trabajo
 WORKDIR /app
@@ -12,10 +10,11 @@ COPY . .
 # Instala las dependencias del proyecto
 RUN npm install
 
+# Copia el archivo .env al contenedor
+COPY .env .env
+
 # Expone el puerto 3000
 EXPOSE 3000
 
-
-
 # Comando para iniciar la aplicación
-CMD ["nodemon", "./app.js"]
+CMD ["node", "app.js"]
