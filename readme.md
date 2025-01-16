@@ -64,6 +64,7 @@ const cronEmailer = cron.schedule('22 18 * * *', async () => {
 }, {
     timezone: 'America/Santiago',
 });
+```
 
 ## 🐋 Uso de la Imagen desde Docker Hub
 
