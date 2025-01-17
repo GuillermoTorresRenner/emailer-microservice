@@ -81,16 +81,11 @@
             <ul class="list-disc">
                 {{#each this.casos}}
                 <li class="inner-card">Auditoría {{this.id_caso}} - <strong>{{this.dias_diferencia}}</strong> Días sin
-                    información
+                    información.
                 </li>
                 {{/each}}
             </ul>
-            <h3>Destinatarios de este correo:</h3>
-            <ul class="list-disc">
-                {{#each this.recipients}}
-                <li>{{this.nombre}} - {{this.email}}</li>
-                {{/each}}
-            </ul>
+
             <p>Saludos.</p>
             <strong>Ministerio de Salud</strong>
         </div>

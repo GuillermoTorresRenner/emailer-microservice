@@ -11,17 +11,12 @@ const MONTH = process.env.MONTH;
 const DAY_OF_WEEK = process.env.DAY_OF_WEEK;
 
 
-// const cronEmailer = cron.schedule(` ${MIN} ${HOUR} ${DAY_OF_MONTH} ${MONTH} ${DAY_OF_WEEK}`, async () => {
-const cronEmailer = cron.schedule(' 05 16 * * *', async () => {
+const cronEmailer = cron.schedule(` ${MIN} ${HOUR} ${DAY_OF_MONTH} ${MONTH} ${DAY_OF_WEEK}`, async () => {
     await main();
 }, {
     timezone: 'America/Santiago',
 });
-const test = async () => {
-    await main();
-}
 
-test();
 
 
 
