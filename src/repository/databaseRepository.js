@@ -6,7 +6,7 @@ const prisma = new PrismaClient();
 
 export const getCasosUnresolved = async () => {
     // Calcula la fecha límite (30 días hábiles atrás desde hoy)
-    const fechaLimite = moment().businessSubtract(30).toDate();
+    const fechaLimite = moment().businessSubtract(process.env.DIAS_VENCIMIENTO).toDate();
 
     try {
         const data = await prisma.casos.findMany({
